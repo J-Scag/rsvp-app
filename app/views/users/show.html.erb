@@ -1,4 +1,29 @@
 <p id="notice"><%= notice %></p>
 
+<h3>User name: <%= @user.name %></h3>
+
+<h4>Hosting</h4>
+<ul>
+<% @user.hosted_events.each do |event| %>
+<li><%= link_to event.name, event %></li>
+<% end %>
+</ul>
+
+<h4>Pending invitations</h4>
+<ul>
+<% @pending.each do |inv| %>
+<li>
+  <%= link_to inv.event.name, inv.event %>
+</li>
+<% end %>
+</ul>
+
+<h4>RSVPs</h4>
+<ul>
+<% @responded.each do |inv| %>
+<li><%= link_to inv.event.name, inv.event %> - <%= inv.accepted ? "Attending" : "Not Attending" %></li>
+<% end %>
+</ul>
+
 <%= link_to 'Edit', edit_user_path(@user) %> |
 <%= link_to 'Back', users_path %>

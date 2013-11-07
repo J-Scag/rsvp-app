@@ -54,6 +54,9 @@ class EventsController < ApplicationController
   # DELETE /events/1
   # DELETE /events/1.json
   def destroy
+    @event.invites.each do |i|
+      i.destroy
+    end
     @event.destroy
     respond_to do |format|
       format.html { redirect_to events_url }
@@ -69,6 +72,6 @@ class EventsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def event_params
-      params.require(:event).permit(:name, :host_name, :date)
+      params.require(:event).permit(:name, :host_name, :date, :guest_list)
     end
 end

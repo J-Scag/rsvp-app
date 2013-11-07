@@ -1,4 +1,16 @@
 <p id="notice"><%= notice %></p>
 
+<h1><%= @event.name %> - <%= @event.date %></h1>
+<h3>Hosted by <%= link_to @event.host.name, @event.host %></h3>
+
+<h5>Invited:</h5>
+<ul>
+<% @event.guests.each do |g| %>
+<li><%= link_to g.name, g %></li>
+<% end %>
+</ul>
+
+<%= link_to 'Send Invitations', new_event_invite_path(@event) %> |
+
 <%= link_to 'Edit', edit_event_path(@event) %> |
 <%= link_to 'Back', events_path %>

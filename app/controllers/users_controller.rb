@@ -10,6 +10,8 @@ class UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.json
   def show
+    @pending = @user.invites.select{|inv| inv.accepted == nil}
+    @responded = @user.invites.select{|inv| inv.accepted == true}
   end
 
   # GET /users/new
@@ -54,6 +56,12 @@ class UsersController < ApplicationController
   # DELETE /users/1
   # DELETE /users/1.json
   def destroy
+    @user.hosted_events.each do |d|
+      d.invites.each do |i|
+        i.destroy
+      end
+      d.destroy
+    end
     @user.destroy
     respond_to do |format|
       format.html { redirect_to users_url }

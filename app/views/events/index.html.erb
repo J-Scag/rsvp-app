@@ -12,10 +12,10 @@
   <tbody>
     <% @events.each do |event| %>
       <tr>
-        <td><%= event.name %></td>
-        <td><%= event.host.name %></td>
-        <td><%= event.date %></td>
-        <td><%= link_to 'Show', event %></td>
+        <td><%= link_to event.name, event %></td>
+        <td> - hosted by:</td>
+        <td><%= link_to event.host_name, event.host %></td>
+        <td> (<%= event.date %>)</td>
         <td><%= link_to 'Edit', edit_event_path(event) %></td>
         <td><%= link_to 'Destroy', event, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
